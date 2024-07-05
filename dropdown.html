@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+</head>
+<body>
+  <form>
+    <label for="dropdown">Choose a month:</label>
+    <select id="dropdown">
+      <option value="Jan">January</option>
+      <option value="Feb">February</option>
+      <option value="Mar">March</option>
+      <option value="Apr">April</option>
+      <option value="May">May</option>
+      <option value="Jun">June</option>
+      <option value="Jul">July</option>
+      <option value="Aug">August</option>
+      <option value="Sep">September</option>
+      <option value="Oct">October</option>
+      <option value="Nov">November</option>
+      <option value="Dec">December</option>
+    </select>
+    <br><br>
+    <button onclick="storeValue(); return false;">Submit</button>
+  </form>
+  
+  <script>
+    // Define storeValue function in the global scope
+    function storeValue() {
+      var selectedMonth = document.getElementById('dropdown').value;
+      console.log('Selected value:', selectedMonth);
+      google.script.run.withSuccessHandler(function() {
+        google.script.host.close();  // Close the dialog
+        google.script.run.continueAfterSelection();  // Continue the script
+      }).returnMonth(selectedMonth);
+    }
+  </script>
+</body>
+</html>
