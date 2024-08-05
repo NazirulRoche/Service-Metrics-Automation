@@ -1,7 +1,7 @@
 class ProcessFour extends ID {
 
-    insertValuesIntoCells(referenceSheet, currentYear, numberOfRows, firstIndexOfServiceAndRegion, selectedMonth) {
-
+    insertValuesIntoCells(referenceSpreadsheet, currentYear, numberOfRows, firstIndexOfServiceAndRegion, selectedMonth) {
+        const referenceSheet = SheetHandler.getReferenceSheet(referenceSpreadsheet);
         const monthsFromReferenceSheet = SheetHandler.getDateInfo(referenceSheet, "opened_at", currentYear).monthsFromReferenceSheet;
 
         let count = 0;

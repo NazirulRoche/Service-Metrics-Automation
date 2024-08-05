@@ -2,6 +2,11 @@
 <html>
 <head>
   <base target="_top">
+  <style>
+    #loadingMessage {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <form>
@@ -21,14 +26,21 @@
       <option value="Dec">December</option>
     </select>
     <br><br>
-    <button onclick="storeValue(); return false;">Submit</button>
+    <button id="submitButton" onclick="storeValue(); return false;">Submit</button>
   </form>
   
+  <div id="loadingMessage">
+    <p>Processing your selection, please wait...</p> 
+  </div>
+
   <script>
-    // Define storeValue function in the global scope
     function storeValue() {
       var selectedMonth = document.getElementById('dropdown').value;
       console.log('Selected value:', selectedMonth);
+      document.getElementById('submitButton').disabled = true; // Disable Submit Button
+      document.getElementById('loadingMessage').style.display = 'inline-block'; // Display loading message
+
+      // Use withSuccessHandler for handling the success
       google.script.run.withSuccessHandler(function() {
         google.script.host.close();  // Close the dialog
         google.script.run.continueAfterSelection();  // Continue the script
@@ -37,3 +49,6 @@
   </script>
 </body>
 </html>
+
+
+

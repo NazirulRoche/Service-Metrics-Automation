@@ -4,7 +4,8 @@
 // Since country and case origin can directly be accessed from the reference sheet, its not included in the constructor
 class ProcessOne extends ID {
 
-    countFromReferenceSheet(referenceSheet) {
+    countFromReferenceSheet(referenceSpreadsheet) {
+      const referenceSheet = referenceSpreadsheet.getSheets()[0];
       let countryColumn = SheetHandler.findColumnHeader(referenceSheet,"Country");
       let caseOriginColumn = SheetHandler.findColumnHeader(referenceSheet, "Case Origin");
       let statusColumn = SheetHandler.findColumnHeader(referenceSheet, "Status");

@@ -3,7 +3,8 @@
 // involves current year so if there is transition of year, it may not work (instead of currentYear, try to use reports' year)
 class ProcessTwo extends ID {
 
-    insertValuesIntoCells(referenceSheet, numberOfRows, firstIndexOfServiceAndRegion, currentYear, selectedMonth) {
+    insertValuesIntoCells(referenceSpreadsheet, numberOfRows, firstIndexOfServiceAndRegion, currentYear, selectedMonth) {
+        const referenceSheet = SheetHandler.getReferenceSheet(referenceSpreadsheet);
         const keyword = "Date/Time Opened";
         const { monthsFromReferenceSheet, years } = SheetHandler.getDateInfo(referenceSheet, keyword, currentYear);
 

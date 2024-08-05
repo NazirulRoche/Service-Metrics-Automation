@@ -15,7 +15,7 @@ class SheetHandler {
     }
 
     static getCellsRangeInfoForID(service, region) {
-        var activeSheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+        var activeSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ALL DH Services");
         let dataRange = activeSheet.getDataRange();
         let values = dataRange.getValues();
 
@@ -97,11 +97,13 @@ class SheetHandler {
         const reportThree = "third type";
         const reportFour = "fourth type";
 
+        // for reports that are filtered by month, must include month === selectedMonth condition
+
         if (service === "Navify Tumorboard" && region === "APAC" && month === selectedMonth) {
             return reportOne;
         } else if (service === "Navify Analytics" && region === "APAC") {
             return reportTwo;
-        } else if (service === "SIP") {
+        } else if (service === "SIP" && month === selectedMonth) {
             return reportThree;
         } else if (service === "ISIS") {
             return reportFour;
@@ -112,5 +114,70 @@ class SheetHandler {
         }
     }
 
+    static getReferenceSheet(referenceSpreadsheet) {
+        let referenceSheets = referenceSpreadsheet.getSheets();
+        
+        let sheetNames = [];
+        for (let i = 0; i < referenceSheets.length; i++) {
+            sheetNames.push(referenceSheets[i].getName());
+        }
+
+        let sheetMonths = [];
+        for (let i = 0; i < sheetNames.length; i++) {
+            let str = sheetNames[i].split("_");
+            sheetMonths.push(str[2]);
+        }
+
+        const latestMonthIndex = sheetMonths.reduce((acc, month, index) => {
+            if (monthNames.indexOf(sheetMonths[acc]) < monthNames.indexOf(month)) acc = index;
+            return acc;
+        }, 0);
+
+        Logger.log("latest month index: " + latestMonthIndex);
+
+        let referenceSheet = referenceSpreadsheet.getSheets()[latestMonthIndex];
+
+        let referenceSheetName = referenceSheet.getName();
+
+        Logger.log(referenceSheetName);
+        
+        referenceSpreadsheet.rename(referenceSheetName);
+
+        return referenceSheet;
+    }
+
+    // binary search may not be suitable for searching for non-empty cell (last cell)
+    // TODO: research on better searching algorithm
+    static getlastRowInSpecificColumn(sheet, columnNumber) {
+        let maxRows = sheet.getMaxRows();
+        let low = 2;
+        let high = maxRows;
+        
+        // using binary search to find the last row of each region column in classification sheet
+        while (low <= high) {
+          let mid = Math.floor((low + high) / 2);
+          let range = sheet.getRange(mid, columnNumber, high - mid + 1, 1);
+          let values = range.getValues();
+          
+          if (values[0][0] === "" && values[values.length - 1][0] === "") {
+            high = mid - 1;
+          } else if (values[0][0] !== "") {
+            low = mid + 1;
+          } else {
+            for (let i = values.length - 1; i >= 0; i--) {
+              if (values[i][0] !== "") {
+                return mid + i;
+              }
+            }
+            high = mid - 1;
+          }
+        }
+        //Logger.log(`last row: ${low - 1}`);
+        return low - 1;  // Adjust by -1 to return the correct last row number
+    }
     
 }
+
+
+
+
