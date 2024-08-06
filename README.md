@@ -18,23 +18,37 @@ To contribute to this project, the following requirements must be met:
 
 No installation or extension is required
 
-## Usage Intructions
+## Usage Instructions
 To begin developing this project, please follow the setup instructions below:
-1. s
-2. 
+1. Open the Google Sheets Development & Testing environment
+2. Click on the extension menu
+3. Choose the Apps Script
+4. The script will be auto created (server script)
+5. Create HTML Script (optional)
+6. Have fun developing the script~
 
 ## Available Features
 In GAS, there are multiple tools that can be utilized to maximize the efficiency of the script.
 
-### Execution Log
+### 1. Execution Log
+GAS offers a feature for the developers to check the variables' values by logging them inside the execution log using `Logger.log()`
 
-### Project History
+Example: `Logger.log('Hello World')`;
 
-### Debugger
+<img src = "images/execution_log_example.png">
 
-### Library
+The result of the logging will appear in the execution log interface
 
-### Services
+This is useful for debugging process in case you prefer to debug manually without using debugger tool
+
+
+### 2. Project History
+
+
+
+### 3. Services and Library
+<img src = "images/GAS_menu.png" height = "450" width = "250">
+
 GAS offers services as built-in APIs for developers to interact programmatically with the systems of Google products. Instead of using API keys containing the URL, these services can be called with the same syntax as classes
 
 1. SpreadsheetApp service
@@ -42,8 +56,68 @@ GAS offers services as built-in APIs for developers to interact programmatically
    
 2. DriveApp service
 
-## Documentation
 
+
+## Documentation
+<div align = "center">
+  <img src = "images/QBR_Service_Metrics_Class_Diagram_latest.png">
+</div>
+<p align = "center">
+  Class diagram of the script
+</p>
+
+### DriveHandler Class
+This is a utility class to handle the operation in Google Drive for:
+  - Fetching files metadata (files' IDs and names)
+  - Manipulating files' metadata
+
+The table below shows the overview of the class methods functionality:
+
+
+|       Class methods       |               Purpose               |           Requirement(s)           |            Outcome            |
+| ------------------------- | ----------------------------------- | ---------------------------------- | ----------------------------- |
+| listFilesInFolder() | listing all the files' IDs and names into arrays (IDs in one array, and names in another array) | No parameter | return Object called fileDetails containing array of fileIds and array of filenames |
+| getDetailsFromFileName() | derive the service, region and month from the file name as a result from the standardized naming convention | needs to pass filenames (from listFilesInFolder) as an argument | return Object called fileDetails containing array of fileIds and array of filenames |
+| matchServicesFromFilesWithSheet() | match the service abbreviation from filenames with the service full name | needs to pass filenames (from listFilesInFolder) as an argument | return an array of services' full names |
+
+This class method is only instantiated as an object once in the main function
+
+
+### SheetHandler Class
+This is a utility class to handle the operations in Google Sheets including:
+- Extract the data
+- Manipulate the data
+- Clean the data
+- Insert the data
+- Insert comments
+
+The table below shows the overview of the class methods functionality:
+
+
+|       Class methods       |               Purpose               |           Requirement(s)           |            Outcome            |
+| ------------------------- | ----------------------------------- | ---------------------------------- | ----------------------------- |
+| findColumnHeader() | Find the column number based on given argument | Needs to pass the whole sheet and the exact column name (case sensitive) as arguments | return the column number (starting from 1)
+| getCellsRangeInfoForID()  | Get the total number of rows and the the first index of the row based on the combination of service AND region | Needs to pass service (from matchServicesFromFilesWithSheet) and region (from getDetailsFromFileName) as arguments | return the total number of rows (cannot be 0) and the first index of the row (cannot be -1)
+| getDateInfo() | clean the Date column due to inconsistency with the data type (some are string, some are Date objects) | Needs to pass the whole sheet, the exact column name (case sensitive), and current year as arguments | return an object of arrays containing month array and year array
+| getCurrentTime() | Get the current time information (date, year, month, etc.) using Date library | No parameter | return an object of arrays containing current month array and current year array
+
+All the methods in this class are declared as static where they can be accessed anywhere throughout the script without having to instantiate the SheetHandler class
+
+   
+### ID Class
+This class works like an abstract class (template class) in which it cannot be instantiated as an object but can be inherited to another class. Its fields and method can only be accessed by its child classes (process classes)
+   
+### ProcessOne Class
+
+   
+### ProcessTwo Class
+
+    
+### ProcessThree Class
+
+    
+### ProcessFour Class
+    
 
 ## Resources
 [Google Sheets Development & Testing Environment](https://docs.google.com/spreadsheets/d/1uLNC91rhGPvsknd7DNO8s35U0D_fkjl21RSy2EFNLLs/edit?gid=1866606411#gid=1866606411)
