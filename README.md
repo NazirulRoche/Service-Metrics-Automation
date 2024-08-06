@@ -1,7 +1,11 @@
 # Apps Script Automation for QBR Service Metrics
+<div align = "center">
+  <img src = "images/Apps_Script_Automation.png">
+</div>
 
-
-Automation Count Feature in Google Sheets
+<p align = "center">
+  Automation Count Feature in Google Sheets
+</p>
 
 ## Project Description
 This project is an automation feature for counting process for QBR Service Metrics. It utilizes Google Apps Script (GAS) as the scripting tool, Google Sheets as data storage, and Google Drive as centralized files storage. It also integrates indirectly Google Sheets and Google Drive services via built-in APIs provided in GAS.
@@ -42,4 +46,16 @@ GAS offers services as built-in APIs for developers to interact programmatically
 
 
 ## Resources
-GeoName API documentation
+[Google Sheets Development & Testing Environment](https://docs.google.com/spreadsheets/d/1uLNC91rhGPvsknd7DNO8s35U0D_fkjl21RSy2EFNLLs/edit?gid=1866606411#gid=1866606411)
+
+[Google Drive Development & Testing Environment](https://drive.google.com/drive/folders/1d4qcRm82KTp2lm-39BA22VH7315xAa9w)
+
+[Google Sheets API documentation](https://developers.google.com/sheets/api/reference/rest)
+
+[Google Drive API documentation](https://developers.google.com/drive/api/reference/rest/v3)
+
+[GeoNames API documentation](https://www.geonames.org/export/web-services.html)
+
+
+
+
