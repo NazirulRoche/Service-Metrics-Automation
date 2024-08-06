@@ -87,6 +87,7 @@ class DriveHandler {
 
         let services = [];
 
+        // pushing property of service object into services array IF service is one of the keys of serviceObject
         servicesFromFilesName.forEach(function(service) {
             if (serviceKeys.includes(service)) {
                 services.push(serviceObject[service]);
@@ -95,5 +96,5 @@ class DriveHandler {
 
         //Logger.log("services: " + services);
         return services;     
-      }
+    }
 }

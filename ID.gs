@@ -1,3 +1,4 @@
+// This works similar to abstract class (template class) since it is not instantiated but inherited by process
 class ID {
     //declare as object so that the order that does not matter
     constructor({service, region, month}) {
@@ -7,7 +8,7 @@ class ID {
     }
 
     defineCells(numberOfRows, firstIndexOfServiceAndRegion, month) {
-      let sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+      let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ALL DH Services");
       let startColumn = 6;    
       let endColumn = 12;
 
