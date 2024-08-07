@@ -7,6 +7,8 @@
   Automation Count Feature in Google Sheets
 </p>
 
+hello
+
 ## Project Description
 This project is an automation feature for counting process for QBR Service Metrics. It utilizes Google Apps Script (GAS) as the scripting tool, Google Sheets as data storage, and Google Drive as centralized files storage. It also integrates indirectly Google Sheets and Google Drive services via built-in APIs provided in GAS.
 
