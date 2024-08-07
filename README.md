@@ -69,12 +69,66 @@ GAS offers a small scale version control to save the script, track the changes, 
 
 GAS offers services as built-in APIs for developers to interact programmatically with the systems of Google products. Instead of using API keys containing the URL, these services can be called with the same syntax as classes
 
-1. SpreadsheetApp service
+1. **SpreadsheetApp service**
+
+    This is a service to interact with the Google Sheet system.
+
   
+    To use this service, we can call it using the keyword of `SpreadsheetApp`
+
+  
+    Examples:
+  
+    `var activeSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ALL DH Services");`
+  
+    `const referenceSpreadsheet = SpreadsheetApp.openById(filteredSheetIds[i]);`
+
    
-2. DriveApp service
+   
+2. **DriveApp service**
+
+   
+    This is a service to interact with the Google Drive system
+   
+
+    To use this service, we can call it using the keyword of `DriveApp`
 
 
+    Examples:
+
+    `var folder = DriveApp.getFolderById(folderId);`
+
+    `DriveApp.getFileById(fileIds[i]);`
+
+
+For further functionalities, you may explore them in the Google Sheets API and Google Drive API documentations provided in the Resources
+
+## GeoNames API Utilization
+
+This is an external public API to fetch the data for region codes. Please ensure the utilization of this API complies with the security policy of Roche.
+
+  1. **GeoNames Username**
+  
+  To use the API, we need to register and login our username and password in the GeoNames website.
+
+  Then, we need to declare our username and if the PIC for this project is leaving, please ensure the username is always up-to-date
+    
+    `const username = 'nazirul_4129';'
+  
+  2. **Endpoints**
+  
+  The endpoints allow the script to access the GeoNames server based on defined protocols set by the endpoint.
+  
+
+  Search endpoint: endpoint that provides the basic information based on the given location. In this script, it is used to fetch the geoname ID
+  
+    `let url = 'http://api.geonames.org/searchJSON?q=' + encodeURIComponent(cityName) + '&maxRows=1&username=' + username;`
+    
+  
+  Get endpoint: endpoint that provides detailed information based on the given geoname ID. It is used to fetch the region code
+  
+    `let url = 'http://api.geonames.org/getJSON?geonameId=' + geonameId + '&username=' + username;`
+      
 
 ## Documentation
 <div align = "center">
@@ -119,15 +173,25 @@ The table below shows the overview of the class methods functionality:
 | getDateInfo() | clean the Date column due to inconsistency with the data type (some are string, some are Date objects) | Needs to pass the whole sheet, the exact column name (case sensitive), and current year as arguments | return an object of arrays containing month array and year array
 | getCurrentTime() | Get the current time information (date, year, month, etc.) using Date library | No parameter | return an object of arrays containing current month array and current year array |
 | determineReportType() | Return report type based on if else condition to determine which process (from 1 to 4) should be enforced to the report | Needs to pass service, region, month, and selectedMonth as the arguments | return a string of report type |
-
+| getReferenceSheet() | return sheet of the latest month in the given spreadsheet | Needs to pass appropriate spreadsheet | return the whole sheet |
+| getlastRowInSpecificColumn | return the empty cell after the last row of given column number | Needs to pass the appropriate sheet and specific column number | return an integer of column number |
 
 All the methods in this class are declared as static where they can be accessed anywhere throughout the script without having to instantiate the SheetHandler class
 
    
 ### ID Class
+
+
 This class works like an abstract class (template class) in which it cannot be instantiated as an object but can be inherited to another class. Its fields and method can only be accessed by its child classes (process classes)
 
 
+The service, region and month are fields declared as constructor in this class and being inherited into the child classes (process classes) so that they will not be rewritten in each process class.
+
+
+defineCells method is the only method in this class and it should be accessed only by the child classes (process classes).
+- The purpose: To define the cells based on the service, region and month provided in the Google Sheet file name.
+- The requirement(s): Needs to pass the total number of rows and first index of rows (from getCellsRangeInfoForID), and the month.
+- The outcome: It will return the range of cells associated to the service, region and month.
    
 ### ProcessOne Class
 
