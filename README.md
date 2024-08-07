@@ -59,14 +59,14 @@ GAS offers a small scale version control to save the script, track the changes, 
   
   1. Track the changes
 
-    <img src = "images/track_changes.png">
+  <img src = "images/track_changes.png" width = "1000" height = "600">
     
   
   2. Restore the previous version
 
      <img src = "images/revert_changes.png">
 
-     Warning: Please ensure that the current script is already up-to-date with the current version so that changes would not be lost
+     Warning: Please ensure that the current script is already up-to-date with the current version so that changes in the current script would not be lost
    
 
 ### 3. Services and Library
