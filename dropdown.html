@@ -27,6 +27,7 @@
     </select>
     <br><br>
     <button id="submitButton" onclick="storeValue(); return false;">Submit</button>
+    <button onclick="cancelSelection(); return false;">Cancel</button> <!-- Cancel button -->
   </form>
   
   <div id="loadingMessage">
@@ -45,6 +46,12 @@
         google.script.host.close();  // Close the dialog
         google.script.run.continueAfterSelection();  // Continue the script
       }).returnMonth(selectedMonth);
+    }
+
+    function cancelSelection() {
+      console.log('Selection canceled');
+      google.script.run.setCancelFlag();  // Set the cancellation flag
+      google.script.host.close();  // Close the dialog without further action
     }
   </script>
 </body>
