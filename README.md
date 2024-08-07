@@ -59,9 +59,14 @@ GAS offers a small scale version control to save the script, track the changes, 
   
   1. Track the changes
 
-
+    <img src = "images/track_changes.png">
+    
   
   2. Restore the previous version
+
+     <img src = "images/revert_changes.png">
+
+     Warning: Please ensure that the current script is already up-to-date with the current version so that changes would not be lost
    
 
 ### 3. Services and Library
@@ -174,7 +179,7 @@ The table below shows the overview of the class methods functionality:
 | getCurrentTime() | Get the current time information (date, year, month, etc.) using Date library | No parameter | return an object of arrays containing current month array and current year array |
 | determineReportType() | Return report type based on if else condition to determine which process (from 1 to 4) should be enforced to the report | Needs to pass service, region, month, and selectedMonth as the arguments | return a string of report type |
 | getReferenceSheet() | return sheet of the latest month in the given spreadsheet | Needs to pass appropriate spreadsheet | return the whole sheet |
-| getlastRowInSpecificColumn | return the empty cell after the last row of given column number | Needs to pass the appropriate sheet and specific column number | return an integer of column number |
+| getlastRowInSpecificColumn() | return the empty cell after the last row of given column number | Needs to pass the appropriate sheet and specific column number | return an integer of column number |
 
 All the methods in this class are declared as static where they can be accessed anywhere throughout the script without having to instantiate the SheetHandler class
 
