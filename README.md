@@ -59,12 +59,12 @@ GAS offers a small scale version control to save the script, track the changes, 
      For every big changes made into the script, it is a good practice to create new version
        
   
-  1. Track the changes
+  2. Track the changes
 
   <img src = "images/track_changes.png" width = "1000" height = "600">
     
   
-  2. Restore the previous version
+  3. Restore the previous version
 
      <img src = "images/revert_changes.png">
 
@@ -252,11 +252,6 @@ The overview of the process includes:
 - count the service metrics based on the date column (after converted into month)
 - define the cells based on the number of rows and first index of row associated to given service, region and month
 - populate the service metrics count into the defined cells range
-
-
-## Unit Testing using QUnitGS2
-
-
 
 
 ## Resources
