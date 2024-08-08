@@ -25,8 +25,10 @@ To begin developing this project, please follow the setup instructions below:
 3. Choose the Apps Script (a script called Code.gs will be auto created and deployed by default)
 4. Have fun developing the script~
 
+
 ## Available Features
 In GAS, there are multiple tools that can be utilized to maximize the efficiency of the script.
+
 
 ### 1. Execution Log
 GAS offers a feature for the developers to check the variables' values by logging them inside the execution log using `Logger.log()`
@@ -70,7 +72,9 @@ GAS offers a small scale version control to save the script, track the changes, 
    
 
 ### 3. Services and Library
-<img src = "images/GAS_menu.png" height = "450" width = "250">
+<div align = "center">
+  <img src = "images/GAS_menu.png" height = "450" width = "250">
+</div>
 
 GAS offers services as built-in APIs for developers to interact programmatically with the systems of Google products. Instead of using API keys containing the URL, these services can be called with the same syntax as classes
 
@@ -116,9 +120,12 @@ This is an external public API to fetch the data for region codes. Please ensure
   
   To use the API, we need to register and login our username and password in the GeoNames website.
 
-  Then, we need to declare our username and if the PIC for this project is leaving, please ensure the username is always up-to-date
+  Then, we need to declare our username.
+  
+  Warning: please ensure the username is always up-to-date (according to the current PIC of the project)
     
-    `const username = 'nazirul_4129';'
+  `const username = 'nazirul_4129';`
+  
   
   2. **Endpoints**
   
@@ -127,12 +134,12 @@ This is an external public API to fetch the data for region codes. Please ensure
 
   Search endpoint: endpoint that provides the basic information based on the given location. In this script, it is used to fetch the geoname ID
   
-    `let url = 'http://api.geonames.org/searchJSON?q=' + encodeURIComponent(cityName) + '&maxRows=1&username=' + username;`
+  `let url = 'http://api.geonames.org/searchJSON?q=' + encodeURIComponent(cityName) + '&maxRows=1&username=' + username;`
     
   
   Get endpoint: endpoint that provides detailed information based on the given geoname ID. It is used to fetch the region code
   
-    `let url = 'http://api.geonames.org/getJSON?geonameId=' + geonameId + '&username=' + username;`
+  `let url = 'http://api.geonames.org/getJSON?geonameId=' + geonameId + '&username=' + username;`
       
 
 ## Documentation
@@ -181,6 +188,7 @@ The table below shows the overview of the class methods functionality:
 | getReferenceSheet() | return sheet of the latest month in the given spreadsheet | Needs to pass appropriate spreadsheet | return the whole sheet |
 | getlastRowInSpecificColumn() | return the empty cell after the last row of given column number | Needs to pass the appropriate sheet and specific column number | return an integer of column number |
 
+
 All the methods in this class are declared as static where they can be accessed anywhere throughout the script without having to instantiate the SheetHandler class
 
    
@@ -200,15 +208,56 @@ defineCells method is the only method in this class and it should be accessed on
    
 ### ProcessOne Class
 
+This process class is primarily supporting Navify Tumor Board for APAC region and this process is customized for "report filtered by a specific month" category
+
+The overview of the process includes:
+- fetch the country and case origin/contact channel data from the source report
+- count the service metrics based on the country and case origin/contact channel columns
+- count the obsolete cases based on status column where the value is "Obsolete"
+- sort the service metrics count array to follow the order of combination of country AND case origin array in the Service Metrics spreadsheet
+- define the cells based on the number of rows and first index of row associated to given service, region and month
    
 ### ProcessTwo Class
 
+This process class is primarily supporting Navify Analytics for APAC region and this process is customized for "report NOT filtered by a specific month" category
+
+The overview of the process includes:
+- fetch the date data from the source report
+- clean the date column by converting them into specific month
+- count the service metrics based on the date column  (after converted into month)
+- count the obsolete cases based on status column where the value is "Obsolete"
+- define the cells based on the number of rows and first index of row associated to given service, region and month
+- populate the service metrics count into the defined cells range
     
 ### ProcessThree Class
 
+This process class is primarily supporting SIP project for Global and this process is customized for "report filtered by a specific month" category
+
+The overview of the process includes:
+- fetch the location data from the source report
+- fetch the location data from region classification sheet and check whether the location from source report already been categorized into region or not
+    - if yes, classify the location into region using the GeoNames API
+    - if no, can proceed to the next step
+- count the service metrics based on the region selected by the user
+- define the cells based on the number of rows and first index of row associated to given service, region and month
+- populate the service metrics count into the defined cells range
     
 ### ProcessFour Class
-    
+
+This process class is primarily supporting ISIS incident for EMEA region and this process is customized for "report NOT filtered by a specific month" category
+
+The overview of the process includes:
+- fetch the date data from the source report
+- clean the date column by converting them into specific month
+- count the service metrics based on the date column (after converted into month)
+- define the cells based on the number of rows and first index of row associated to given service, region and month
+- populate the service metrics count into the defined cells range
+
+
+## Unit Testing using QUnitGS2
+
+
+
 
 ## Resources
 [Google Sheets Development & Testing Environment](https://docs.google.com/spreadsheets/d/1uLNC91rhGPvsknd7DNO8s35U0D_fkjl21RSy2EFNLLs/edit?gid=1866606411#gid=1866606411)
