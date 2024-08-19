@@ -254,6 +254,50 @@ The overview of the process includes:
 - populate the service metrics count into the defined cells range
 
 
+## Guide: Adding Process
+
+To add more process, you can create another class that inherits the ID class. 
+
+Example: 
+
+`class ProcessFive extends ID {
+    // configure your logic here  
+}`
+
+It will inherit the fields (service, region and month) and method (defineCells) so that you can freely use them inside the process class using `super` keyword.
+
+### Integrate the process into the main function
+
+1. *Logic configuration in determineReportType method (from SheetHandler class)*
+
+  Currently, the logic of determining the type report is by grouping the reports into suitable process
+
+  Condition statement inside the class method:
+
+  ```
+  if (service === "Navify Tumorboard" && region === "APAC" && month === selectedMonth) {
+            return reportOne;
+        } else if (service === "Navify Analytics" && region === "APAC") {
+            return reportTwo;
+        } else if (service === "SIP" && month === selectedMonth) {
+            return reportThree;
+        } else if (service === "ISIS") {
+            return reportFour;
+        } else if (service === "Navify Analytics" && region === "EMEA" && month === selectedMonth) { // report is similar to nTB APAC
+            return reportOne;
+        } else {
+            return 0;
+        }
+  }
+  ```
+  Adding process type requires adding more report type. Therefore, you must add another else if block that incorporates specific reports (based on service AND/OR region)      and returns the new report type
+
+  **NOTE: for reports that are filtered by a specific month, you must also include `month === selectedMonth` as one of the conditions**
+    
+2. *Calling the class methods inside the main function*
+
+  
+
 ## Resources
 [Google Sheets Development & Testing Environment](https://docs.google.com/spreadsheets/d/1uLNC91rhGPvsknd7DNO8s35U0D_fkjl21RSy2EFNLLs/edit?gid=1866606411#gid=1866606411)
 
