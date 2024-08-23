@@ -296,6 +296,35 @@ It will inherit the fields (service, region and month) and method (defineCells) 
     
 2. *Calling the class methods inside the main function*
 
+You may simply call all the class methods by the order of the methods written in the class itself. However, please ensure that the arguments that are passed into the methods' parameters are correct to avoid error
+
+```
+switch(reportType) {
+            case "first type":
+                let processOne = new ProcessOne({service: filteredServices[i], region: filteredRegions[i], month: filteredMonths[i]});
+                let {counter, countObsoleteCase} = processOne.countFromReferenceSheet(referenceSpreadsheet);
+                let sortedValues = processOne.sortValuesBasedOnCurrentSheetData(counter, numberOfRowsAndFirstIndex[0], numberOfRowsAndFirstIndex[1]);
+                processOne.insertValuesIntoMainSheet(sortedValues, numberOfRowsAndFirstIndex[0], numberOfRowsAndFirstIndex[1], selectedMonth);
+                processOne.isThereObseleteCases(countObsoleteCase, numberOfRowsAndFirstIndex[0], numberOfRowsAndFirstIndex[1], selectedMonth);
+                break;
+            case "second type":
+                let processTwo = new ProcessTwo({service: filteredServices[i], region: filteredRegions[i], month: filteredMonths[i]});
+                processTwo.insertValuesIntoCells(referenceSpreadsheet, numberOfRowsAndFirstIndex[0], numberOfRowsAndFirstIndex[1], currentYear, selectedMonth);
+                break;
+            case "third type":
+                let processThree = new ProcessThree({service: filteredServices[i], region: filteredRegions[i], month: filteredMonths[i]});
+                const count = processThree.countLocations(referenceSpreadsheet, filteredRegions[i]);
+                processThree.insertValuesByUpdatedRegion(count, filteredServices[i], selectedMonth, filteredRegions[i]);
+                break;
+            case "fourth type":
+                let processFour = new ProcessFour({service: filteredServices[i], region: filteredRegions[i], month: filteredMonths[i]});
+                processFour.insertValuesIntoCells(referenceSpreadsheet, currentYear, numberOfRowsAndFirstIndex[0], numberOfRowsAndFirstIndex[1], selectedMonth);
+                break;
+            default:
+                Logger.log("Process is not yet established or report is not related.");
+                break;
+}
+```
   
 
 ## Resources
